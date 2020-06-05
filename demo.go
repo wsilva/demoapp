@@ -6,9 +6,21 @@ import (
 	"net"
 	"net/http"
 	"os"
+
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
+)
+
+var requestCounter = prometheus.NewCounter(
+	prometheus.CounterOpts{
+		Name: "demoapp_request_count",
+		Help: "Number of request since startup",
+	},
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
+
+	requestCounter.Inc()
 
 	hostname, err := os.Hostname()
 	if err != nil {
@@ -39,6 +51,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	prometheus.MustRegister(requestCounter)
 	http.HandleFunc("/", handler)
+	http.Handle("/metrics", promhttp.Handler())
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
