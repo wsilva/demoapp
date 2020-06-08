@@ -1,1 +1,3 @@
-# repo with a demoapp to be used in talks and workshops
+# Demoapp
+
+Repo with a go demoapp to be used as example in talks and workshops.
