@@ -42,8 +42,8 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	}
 	ips = ips[:len(ips)-2]
 	fmt.Fprintf(w,
-		"<div style=\"color:red\" align=\"center\">\n"+
-			"<h1>DemoApp v2</h1>\n"+
+		"<div style=\"color:blue\" align=\"center\">\n"+
+			"<h1>DemoApp v3</h1>\n"+
 			"<h2>Hostname: %s</h2>\n"+
 			"<h2>IP(s): %s</h2>\n"+
 			"</div>",
